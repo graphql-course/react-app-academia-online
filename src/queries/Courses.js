@@ -1,48 +1,40 @@
-import React, { Component } from 'react';
-import './../App.css';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import React, { Component } from "react";
+import "./../App.css";
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
 class Course extends Component {
   render() {
-    console.log('Cursos', this.props.data.courses);
-    console.log('Curso 1', this.props.data.courseOne);
-    console.log('Curso 2', this.props.data.courseTwo)
-    return (
-      <div className="App">
-        Cursos
-      </div>
-    );
+    console.log("Cursos", this.props.data.courses);
+    console.log("Curso 1", this.props.data.courseOne);
+    console.log("Curso 2", this.props.data.courseTwo);
+    return <div className="App">Cursos</div>;
   }
-  
-  
 }
 
 const repoQuery = gql`
   query {
     courses {
-        ...Curso
+      ...Curso
     }
     courseOne: course(id: "1") {
-        ...Curso
+      ...Curso
     }
     courseTwo: course(id: "2") {
-        ...Curso
+      ...Curso
     }
-    }
+  }
 
-    fragment Curso on Course {
+  fragment Curso on Course {
     id
     title
     description
     clases
     time
     logo
-    }
-`
+  }
+`;
 
-const CoursesWithData = graphql(
-  repoQuery
-)(Course)
+const CoursesWithData = graphql(repoQuery)(Course);
 
 export default CoursesWithData;
